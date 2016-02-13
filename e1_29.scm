@@ -1,0 +1,20 @@
+(define (integral f a b n)
+  (define h (/ (- b a) n))
+  (define (iterm k)
+    (define yn (f (+ a (* k h))))
+    (define (even? n)
+      (= (remainder n 2) 0))
+    (cond ((or (= k 0) (= k n)) yn)
+          ((even? k) (* 2.0 yn))
+          (else (* 4.0 yn))))
+  (* (/ h 3) (sum iterm 0 inc n)))
+
+(define (inc n) (+ n 2))
+(define (sum term a next b)
+  (if (> a b) 
+    0
+    (+ (term a)
+       (sum term (next a) next b))))
+
+(define (cube n) (* n n n))
+(define (identity x) x)

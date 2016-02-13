@@ -1,4 +1,4 @@
-(define (inc n) (+ n 2))
+(define (inc n) (+ n 1))
 (define (sum term a next b)
   (define (iter a result)
     (if (> a b)

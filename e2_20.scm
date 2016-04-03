@@ -1,0 +1,21 @@
+(define (parity x)
+  (remainder x 2))
+(define (same-parity . numbers)
+  (define (sp remaining-numbers accumulator)
+    (cond ((null? remaining-numbers) accumulator)
+          ((not (= (parity (car accumulator)) 
+                   (parity (car remaining-numbers))))
+           (sp (cdr remaining-numbers) accumulator))
+          ((= (parity (car accumulator)) 
+              (parity (car remaining-numbers)))
+           (sp 
+             (cdr remaining-numbers) 
+             (cons (car remaining-numbers) accumulator)))))
+  (reverse (sp (cdr numbers) (list (car numbers))))
+
+(define (reverse items)
+  (define (reverse-helper items result)
+    (if (null? items)
+      result
+      (reverse-helper (cdr items) (cons (car items) result))))
+  (reverse-helper items '()))

@@ -12,6 +12,6 @@
 (define (square-tree-map tree)
   (map (lambda (sub-tree)
          (if (pair? sub-tree)
-             (square-tree sub-tree)
+             (square-tree-map sub-tree)
            (* sub-tree sub-tree)))
        tree))
